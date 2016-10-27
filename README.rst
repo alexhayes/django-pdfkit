@@ -43,7 +43,7 @@ have reduced functionality and you will most likely want to install one of the
 stable binaries provided at http://wkhtmltopdf.org/downloads.html which provide
 increased functionality (headless, patched Qt, better rendering support).
 
-Installation on Ubuntu is as simple as;
+Installation of the pre-compiled binaries on Ubuntu is as simple as;
 
 .. code-block:: bash
 
