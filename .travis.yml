@@ -46,9 +46,9 @@ install:
   - pip install -r requirements/docs.txt
 
 script:
-  - tox
-  - pylint django_pdfkit --cov=codecov
+  - py.test django_pdfkit --cov=codecov
+  - pylint django_pdfkit
   - cd docs && make clean html
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - codecov
