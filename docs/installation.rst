@@ -21,6 +21,9 @@ Installation of the pre-compiled binaries on Ubuntu is as simple as;
     sudo cp -r wkhtmltox/* /usr/
 
 
+pdfkit_ will automatically look for the ``wkhtmltohtml`` binary on your path
+however if it's not on your path you can :ref:`set it <wkhtmltopdf-bin>`.
+
 Install
 -------
 
@@ -41,3 +44,4 @@ From github;
 
 
 .. _wkhtmltopdf: http://wkhtmltopdf.org/
+.. _pdfkit: https://pypi.python.org/pypi/pdfkit

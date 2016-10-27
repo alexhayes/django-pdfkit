@@ -46,4 +46,21 @@ or as a property on the view.
 - ``filename`` - set the downloadable filename.
 - ``inline`` - default to display PDF inline, can be overridden with the
   ``download`` query string parameter.
-- ``wkhtmltopdf_bin`` - set this is wkhtmltopdf is not on your path.
+
+
+.. _wkhtmltopdf-bin:
+
+``WKHTMLTOPDF_BIN`` Environment Variable
+----------------------------------------
+
+pdfkit_ will automatically look for the ``wkhtmltohtml`` binary on your path
+however if you've installed it outside your path you can set the environment
+variable ``WKHTMLTOPDF_BIN``.
+
+.. code-block:: bash
+
+    WKHTMLTOPDF_BIN=/path/to/wkhtmltopdf ./manage.py runserver
+
+
+.. _wkhtmltopdf: http://wkhtmltopdf.org/
+.. _pdfkit: https://pypi.python.org/pypi/pdfkit
