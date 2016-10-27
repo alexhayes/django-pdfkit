@@ -46,7 +46,7 @@ install:
   - pip install -r requirements/docs.txt
 
 script:
-  - cd django_pdfkit && py.test --cov=.
+  - cd django_pdfkit && py.test --cov=. && cd ..
   - pylint django_pdfkit
   - cd docs && make clean html
 
