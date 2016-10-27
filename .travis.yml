@@ -47,7 +47,7 @@ install:
 
 script:
   - tox
-  - pylint django_pdfkit
+  - pylint django_pdfkit --cov=codecov
   - cd docs && make clean html
 
 after_success:
