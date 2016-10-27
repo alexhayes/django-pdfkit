@@ -7,6 +7,7 @@
 """
 from __future__ import absolute_import, print_function, unicode_literals
 
+import os
 from os.path import basename, splitext
 
 from django.conf import settings
@@ -27,9 +28,6 @@ class PDFView(TemplateView):
 
     #: Set pdfkit options dict.
     pdfkit_options = None
-
-    #: Set the path to the wkhtmltopdf binary.
-    wkhtmltopdf_bin = None
 
     def get(self, request, *args, **kwargs):
         """
@@ -68,8 +66,9 @@ class PDFView(TemplateView):
             options['debug-javascript'] = 1
 
         kwargs = {}
-        if self.wkhtmltopdf_bin:
-            kwargs['configuration'] = pdfkit.configuration(wkhtmltopdf=settings.WKHTMLTOPDF_BIN)
+        wkhtmltopdf_bin = os.environ.get('WKHTMLTOPDF_BIN')
+        if wkhtmltopdf_bin:
+            kwargs['configuration'] = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_bin)
 
         pdf = pdfkit.from_string(html, False, options, **kwargs)
 
