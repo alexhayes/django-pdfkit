@@ -1,0 +1,46 @@
+language: python
+matrix:
+  include:
+    # Python 2.7
+    - python: 2.7
+      env: TOXENV=py27-django18
+    - python: 2.7
+      env: TOXENV=py27-django19
+    - python: 2.7
+      env: TOXENV=py27-django110
+
+    # Python 3.4
+    - python: 3.4
+      env: TOXENV=py34-django18
+    - python: 3.4
+      env: TOXENV=py34-django19
+    - python: 3.4
+      env: TOXENV=py34-django110
+
+    # Python 3.5
+    - python: 3.5
+      env: TOXENV=py35-django18
+    - python: 3.5
+      env: TOXENV=py35-django19
+    - python: 3.5
+      env: TOXENV=py35-django110
+
+    # pypy
+    - python: pypy
+      env: TOXENV=pypy-django18
+    - python: pypy
+      env: TOXENV=pypy-django19
+    - python: pypy
+      env: TOXENV=pypy-django110
+
+install:
+  - pip install tox
+  - pip install codecov
+
+script:
+  - tox
+  - pylint django_pdfkit
+  - cd docs && make clean html
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
