@@ -18,7 +18,7 @@ Installation of the pre-compiled binaries on Ubuntu is as simple as;
 
     wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
     tar -xf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
-    sudo cp wkhtmltox/* /usr/
+    sudo cp -r wkhtmltox/* /usr/
 
 
 Install
