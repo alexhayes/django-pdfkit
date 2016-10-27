@@ -1,0 +1,5 @@
+-r default.txt
+coverage
+pytest
+pytest-django
+pylint

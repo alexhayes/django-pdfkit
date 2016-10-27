@@ -1,0 +1,20 @@
+[MASTER]
+max-line-length=140
+
+[MESSAGES CONTROL]
+
+disable=
+    missing-docstring
+
+[REPORTS]
+
+output-format=colorized
+
+[TYPECHECK]
+
+generated-members=
+    content,
+    DoesNotExist,
+    MultipleObjectsReturned,
+    objects,
+    status_code,
