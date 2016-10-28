@@ -14,7 +14,7 @@ echo "### MUNGING VERSION $VERSION INTO $INIT_PATH"
 PY_VERSION=`echo $VERSION | sed -e 's/\./, /g'`
 
 # Replace the version number
-sed --in-place -e "s/VERSION = version_info_t(.*)/VERSION = version_info_t($PY_VERSION, '', '')/g" $INIT_PATH
+sed --in-place -e "s/VERSION = VersionInfo(.*)/VERSION = VersionInfo($PY_VERSION, '', '')/g" $INIT_PATH
 
 # Ensure we haven't caused some kind of error
 python -m py_compile $INIT_PATH
