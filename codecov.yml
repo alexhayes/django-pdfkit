@@ -1,3 +1,9 @@
 codecov:
   branch: develop
   bot: alexhayes
+  
+comment:
+  layout: "header, diff, changes, sunburst, uncovered, tree"
+  branches:
+    - *
+  behavior: default
