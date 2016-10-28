@@ -51,4 +51,4 @@ script:
   - cd docs && make clean html
 
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
