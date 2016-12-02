@@ -107,7 +107,9 @@ class PDFView(TemplateView):
         :rtype: str
         """
         static_url = '%s://%s%s' % (self.request.scheme, self.request.get_host(), settings.STATIC_URL)
-        with override_settings(STATIC_URL=static_url):
+        media_url = '%s://%s%s' % (self.request.scheme, self.request.get_host(), settings.MEDIA_URL)
+
+        with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
             template = loader.get_template(self.template_name)
             context = self.get_context_data(*args, **kwargs)
             request_context = RequestContext(self.request, context)
