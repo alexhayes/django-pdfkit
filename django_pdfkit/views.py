@@ -112,6 +112,5 @@ class PDFView(TemplateView):
         with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
             template = loader.get_template(self.template_name)
             context = self.get_context_data(*args, **kwargs)
-            request_context = RequestContext(self.request, context)
-            html = template.render(request_context)
+            html = template.render(context)
             return html
