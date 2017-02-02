@@ -12,7 +12,6 @@ from os.path import basename, splitext
 
 from django.conf import settings
 from django.http import HttpResponse
-from django.template import RequestContext
 from django.template import loader
 from django.test import override_settings
 from django.views.generic import TemplateView
