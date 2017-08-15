@@ -1,3 +1,13 @@
+# Release 0.3.0 - Tue 15 Aug 2017 10:37:42 AEST
+
+- Fix pylint 'no-else-return' linting issue.
+- Change location of wkhtmltox - the old location seems to have disappeared.
+- Fixes #7 - Added Django 1.11 and Python 3.6 support.
+- Added args and kwargs to classview functions (#5)
+- Added args and kwargs to classview functions which get passed through to get_context_data.
+- Set the MEDIA_URL setting just like STATIC_URL is set.
+- Now using dict rather than RequestContext for future Django support.
+
 # Release 0.2.1 - Friday 28 October  14:13:32 AEDT 2016
 
 - Fixed munge of django_pdfkit/__init__.py (#4)

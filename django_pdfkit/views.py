@@ -12,7 +12,6 @@ from os.path import basename, splitext
 
 from django.conf import settings
 from django.http import HttpResponse
-from django.template import RequestContext
 from django.template import loader
 from django.test import override_settings
 from django.views.generic import TemplateView
@@ -37,12 +36,12 @@ class PDFView(TemplateView):
         """
         if 'html' in request.GET:
             # Output HTML
-            content = self.render_html()
+            content = self.render_html(*args, **kwargs)
             return HttpResponse(content)
 
         else:
             # Output PDF
-            content = self.render_pdf()
+            content = self.render_pdf(*args, **kwargs)
 
             response = HttpResponse(content, content_type='application/pdf')
 
@@ -53,13 +52,13 @@ class PDFView(TemplateView):
 
             return response
 
-    def render_pdf(self):
+    def render_pdf(self, *args, **kwargs):
         """
         Render the PDF and returns as bytes.
 
         :rtype: bytes
         """
-        html = self.render_html()
+        html = self.render_html(*args, **kwargs)
 
         options = self.get_pdfkit_options()
         if 'debug' in self.request.GET and settings.DEBUG:
@@ -82,11 +81,11 @@ class PDFView(TemplateView):
         """
         if self.pdfkit_options is not None:
             return self.pdfkit_options
-        else:
-            return {
-                'page-size': 'A4',
-                'encoding': 'UTF-8',
-            }
+
+        return {
+            'page-size': 'A4',
+            'encoding': 'UTF-8',
+        }
 
     def get_filename(self):
         """
@@ -97,19 +96,20 @@ class PDFView(TemplateView):
         if self.filename is None:
             name = splitext(basename(self.template_name))[0]
             return '{}.pdf'.format(name)
-        else:
-            return self.filename
 
-    def render_html(self):
+        return self.filename
+
+    def render_html(self, *args, **kwargs):
         """
         Renders the template.
 
         :rtype: str
         """
         static_url = '%s://%s%s' % (self.request.scheme, self.request.get_host(), settings.STATIC_URL)
-        with override_settings(STATIC_URL=static_url):
+        media_url = '%s://%s%s' % (self.request.scheme, self.request.get_host(), settings.MEDIA_URL)
+
+        with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
             template = loader.get_template(self.template_name)
-            context = self.get_context_data(**{})
-            request_context = RequestContext(self.request, context)
-            html = template.render(request_context)
+            context = self.get_context_data(*args, **kwargs)
+            html = template.render(context)
             return html

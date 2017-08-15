@@ -20,6 +20,8 @@ INSTALLED_APPS = [
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
 SECRET_KEY = 's3cr3t'
 
 # Django replaces this, but it still wants it. *shrugs*
