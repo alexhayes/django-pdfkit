@@ -81,11 +81,11 @@ class PDFView(TemplateView):
         """
         if self.pdfkit_options is not None:
             return self.pdfkit_options
-        else:
-            return {
-                'page-size': 'A4',
-                'encoding': 'UTF-8',
-            }
+
+        return {
+            'page-size': 'A4',
+            'encoding': 'UTF-8',
+        }
 
     def get_filename(self):
         """
@@ -96,8 +96,8 @@ class PDFView(TemplateView):
         if self.filename is None:
             name = splitext(basename(self.template_name))[0]
             return '{}.pdf'.format(name)
-        else:
-            return self.filename
+
+        return self.filename
 
     def render_html(self, *args, **kwargs):
         """

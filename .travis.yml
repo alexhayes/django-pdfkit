@@ -1,40 +1,53 @@
 language: python
 matrix:
   include:
+    # See https://docs.djangoproject.com/en/1.11/faq/install/#what-python-version-can-i-use-with-django
     # Python 2.7
     - python: 2.7
       env: TOXENV=py27-django18
-#    - python: 2.7
-#      env: TOXENV=py27-django19
-#    - python: 2.7
-#      env: TOXENV=py27-django110
-#
-#    # Python 3.4
-#    - python: 3.4
-#      env: TOXENV=py34-django18
-#    - python: 3.4
-#      env: TOXENV=py34-django19
-#    - python: 3.4
-#      env: TOXENV=py34-django110
-#
-#    # Python 3.5
-#    - python: 3.5
-#      env: TOXENV=py35-django18
-#    - python: 3.5
-#      env: TOXENV=py35-django19
-#    - python: 3.5
-#      env: TOXENV=py35-django110
-#
-#    # pypy
-#    - python: pypy
-#      env: TOXENV=pypy-django18
-#    - python: pypy
-#      env: TOXENV=pypy-django19
-#    - python: pypy
-#      env: TOXENV=pypy-django110
+    - python: 2.7
+      env: TOXENV=py27-django19
+    - python: 2.7
+      env: TOXENV=py27-django110
+    - python: 2.7
+      env: TOXENV=py27-django111
+
+    # Python 3.4
+    - python: 3.4
+      env: TOXENV=py34-django18
+    - python: 3.4
+      env: TOXENV=py34-django19
+    - python: 3.4
+      env: TOXENV=py34-django110
+    - python: 3.4
+      env: TOXENV=py34-django111
+
+    # Python 3.5
+    - python: 3.5
+      env: TOXENV=py35-django18
+    - python: 3.5
+      env: TOXENV=py35-django19
+    - python: 3.5
+      env: TOXENV=py35-django110
+    - python: 3.5
+      env: TOXENV=py35-django111
+
+    # Python 3.6
+    - python: 3.6
+      env: TOXENV=py36-django111
+
+    # pypy
+    - python: pypy
+      env: TOXENV=pypy-django18
+    - python: pypy
+      env: TOXENV=pypy-django19
+    - python: pypy
+      env: TOXENV=pypy-django110
+    - python: pypy
+      env: TOXENV=pypy-django111
 
 before_install:
-  - "wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz"
+  - "wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz"
   - "tar -xf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz"
   - "sudo cp -r wkhtmltox/* /usr/"
 
@@ -44,6 +57,9 @@ install:
   - pip install Django==1.10
   - pip install -r requirements/test.txt
   - pip install -r requirements/docs.txt
+  # TODO: Switch over to pylint v2.0.0 when it becomes available - see circle.yml for further changes
+  - pip install git+https://github.com/PyCQA/pylint.git
+  - pip install git+https://github.com/PyCQA/astroid.git
 
 script:
   - py.test --cov=django_pdfkit
