@@ -1,3 +1,7 @@
+# Release 0.3.1 - Tue 15 Aug 2017 10:47:25 AEST
+
+- Fixed package version number.
+
 # Release 0.3.0 - Tue 15 Aug 2017 10:37:42 AEST
 
 - Fix pylint 'no-else-return' linting issue.

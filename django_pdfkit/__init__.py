@@ -10,7 +10,7 @@ VersionInfo = namedtuple(
     'VersionInfo', ('major', 'minor', 'micro', 'releaselevel', 'serial'),
 )
 
-VERSION = VersionInfo(0, 2, 1, '', '')
+VERSION = VersionInfo(0, 3, 1, '', '')
 __version__ = '{0.major}.{0.minor}.{0.micro}{0.releaselevel}'.format(VERSION)
 __author__ = 'Alex Hayes'
 __contact__ = 'alex@alution.com'
