@@ -27,6 +27,9 @@ class PDFView(TemplateView):
 
     #: Set pdfkit options dict.
     pdfkit_options = None
+    
+    def can_render_html(self):
+        return 'html' in request.GET
 
     def get(self, request, *args, **kwargs):
         """
@@ -34,7 +37,7 @@ class PDFView(TemplateView):
 
         :rtype: HttpResponse
         """
-        if 'html' in request.GET:
+        if self.can_render_html():
             # Output HTML
             content = self.render_html(*args, **kwargs)
             return HttpResponse(content)
