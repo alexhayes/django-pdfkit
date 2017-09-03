@@ -84,13 +84,10 @@ class PDFView(TemplateView):
 
         :rtype: dict
         """
+        options = {'page-size': 'A4', 'encoding': 'UTF-8'}
         if self.pdfkit_options is not None:
-            return self.pdfkit_options
-
-        return {
-            'page-size': 'A4',
-            'encoding': 'UTF-8',
-        }
+            options.update(self.pdfkit_options)
+        return options
 
     def get_filename(self):
         """
