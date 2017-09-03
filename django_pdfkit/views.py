@@ -8,14 +8,16 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 import os
+
 from os.path import basename, splitext
+
+import pdfkit
 
 from django.conf import settings
 from django.http import HttpResponse
 from django.template import loader
 from django.test import override_settings
 from django.views.generic import TemplateView
-import pdfkit
 
 
 class PDFView(TemplateView):
@@ -28,13 +30,16 @@ class PDFView(TemplateView):
     #: Set pdfkit options dict.
     pdfkit_options = None
 
+    #: Set to false if you don't want render html
+    html = True
+
     def get(self, request, *args, **kwargs):
         """
         Return a HTTPResponse either of a PDF file or HTML.
 
         :rtype: HttpResponse
         """
-        if 'html' in request.GET:
+        if self.html is True:
             # Output HTML
             content = self.render_html(*args, **kwargs)
             return HttpResponse(content)
@@ -79,13 +84,10 @@ class PDFView(TemplateView):
 
         :rtype: dict
         """
+        options = {'page-size': 'A4', 'encoding': 'UTF-8'}
         if self.pdfkit_options is not None:
-            return self.pdfkit_options
-
-        return {
-            'page-size': 'A4',
-            'encoding': 'UTF-8',
-        }
+            options.update(self.pdfkit_options)
+        return options
 
     def get_filename(self):
         """
@@ -110,6 +112,6 @@ class PDFView(TemplateView):
 
         with override_settings(STATIC_URL=static_url, MEDIA_URL=media_url):
             template = loader.get_template(self.template_name)
-            context = self.get_context_data(*args, **kwargs)
+            context = self.get_context_data(**kwargs)
             html = template.render(context)
             return html

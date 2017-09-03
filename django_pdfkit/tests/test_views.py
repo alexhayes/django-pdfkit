@@ -75,7 +75,7 @@ def test_html(client):
     """
     Test that the query string parameter ?html outputs HTML.
     """
-    response = client.get('%s?html' % reverse('pdf'))
+    response = client.get('%s' % reverse('html'))
     with open(os.path.join(TESTS_TEMPLATE_DIR, 'basic.html'), 'rb') as basic_file:
         expected = basic_file.read()
     assert response.content == expected

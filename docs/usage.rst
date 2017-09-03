@@ -10,7 +10,7 @@ Simply use the class based ``PDFView`` which is a drop in replacement for ``Temp
     from django_pdfkit import PDFView
 
     ...
-    url(r'^my-pdf/$', PDFView.as_view(template_name='my-pdf.html'), name='my-pdf'),
+    url(r'^my-pdf/$', PDFView.as_view(template_name='my-pdf.html', html=False), name='my-pdf'),
     ...
 
 
@@ -29,8 +29,6 @@ The following query parameters can adjust the views behaviour.
 - ``inline`` - don't set the ``CONTENT-DISPOSITION`` header, causing the PDF to be
   displayed inline if the browser supports it.
 - ``download`` - set the ``CONTENT-DISPOSITION`` header (default).
-- ``html`` - don't render as a PDF, render as HTML, useful for debugging your
-  HTML output.
 - ``debug`` - turn on debug mode when calling pdfkit - only works when
   ``settings.DEBUG`` is ``True``.
 
@@ -44,6 +42,7 @@ Define any of the following properties either as a kwarg to ``PDFView.as_view``
 or as a property on the view.
 
 - ``filename`` - set the downloadable filename.
+- ``html`` - set to false to render pdf.
 - ``inline`` - default to display PDF inline, can be overridden with the
   ``download`` query string parameter.
 
