@@ -28,13 +28,16 @@ class PDFView(TemplateView):
     #: Set pdfkit options dict.
     pdfkit_options = None
 
+    #: Set to false if you don't want render html
+    html = True
+
     def get(self, request, *args, **kwargs):
         """
         Return a HTTPResponse either of a PDF file or HTML.
 
         :rtype: HttpResponse
         """
-        if 'html' in request.GET:
+        if self.html is True:
             # Output HTML
             content = self.render_html(*args, **kwargs)
             return HttpResponse(content)
