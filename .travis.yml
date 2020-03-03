@@ -2,26 +2,6 @@ language: python
 matrix:
   include:
     # See https://docs.djangoproject.com/en/1.11/faq/install/#what-python-version-can-i-use-with-django
-    # Python 2.7
-    - python: 2.7
-      env: TOXENV=py27-django18
-    - python: 2.7
-      env: TOXENV=py27-django19
-    - python: 2.7
-      env: TOXENV=py27-django110
-    - python: 2.7
-      env: TOXENV=py27-django111
-
-    # Python 3.4
-    - python: 3.4
-      env: TOXENV=py34-django18
-    - python: 3.4
-      env: TOXENV=py34-django19
-    - python: 3.4
-      env: TOXENV=py34-django110
-    - python: 3.4
-      env: TOXENV=py34-django111
-
     # Python 3.5
     - python: 3.5
       env: TOXENV=py35-django18
@@ -31,20 +11,100 @@ matrix:
       env: TOXENV=py35-django110
     - python: 3.5
       env: TOXENV=py35-django111
+    - python: 3.5
+      env: TOXENV=py35-django20
+    - python: 3.5
+      env: TOXENV=py35-django21
+    - python: 3.5
+      env: TOXENV=py35-django22
 
     # Python 3.6
     - python: 3.6
+      env: TOXENV=py36-django18
+    - python: 3.6
+      env: TOXENV=py36-django19
+    - python: 3.6
+      env: TOXENV=py36-django110
+    - python: 3.6
       env: TOXENV=py36-django111
+    - python: 3.6
+      env: TOXENV=py36-django20
+    - python: 3.6
+      env: TOXENV=py36-django21
+    - python: 3.6
+      env: TOXENV=py36-django22
+    - python: 3.6
+      env: TOXENV=py36-django30
 
-    # pypy
+    # Python 3.7
+    - python: 3.7
+      env: TOXENV=py36-django18
+    - python: 3.7
+      env: TOXENV=py36-django19
+    - python: 3.7
+      env: TOXENV=py36-django110
+    - python: 3.7
+      env: TOXENV=py36-django111
+    - python: 3.7
+      env: TOXENV=py36-django20
+    - python: 3.7
+      env: TOXENV=py36-django21
+    - python: 3.7
+      env: TOXENV=py36-django22
+    - python: 3.7
+      env: TOXENV=py36-django30
+
+    # Python 3.8
+    - python: 3.8
+      env: TOXENV=py36-django18
+    - python: 3.8
+      env: TOXENV=py36-django19
+    - python: 3.8
+      env: TOXENV=py36-django110
+    - python: 3.8
+      env: TOXENV=py36-django111
+    - python: 3.8
+      env: TOXENV=py36-django20
+    - python: 3.8
+      env: TOXENV=py36-django21
+    - python: 3.8
+      env: TOXENV=py36-django22
+    - python: 3.8
+      env: TOXENV=py36-django30
+
+    # PyPy
     - python: pypy
-      env: TOXENV=pypy-django18
+      env: TOXENV=pypy3-django18
     - python: pypy
-      env: TOXENV=pypy-django19
+      env: TOXENV=pypy3-django19
     - python: pypy
-      env: TOXENV=pypy-django110
+      env: TOXENV=pypy3-django110
     - python: pypy
-      env: TOXENV=pypy-django111
+      env: TOXENV=pypy3-django111
+    - python: pypy
+      env: TOXENV=pypy3-django20
+    - python: pypy
+      env: TOXENV=pypy3-django21
+    - python: pypy
+      env: TOXENV=pypy3-django22
+
+    # PyPy 3
+    - python: pypy3
+      env: TOXENV=pypy3-django18
+    - python: pypy3
+      env: TOXENV=pypy3-django19
+    - python: pypy3
+      env: TOXENV=pypy3-django110
+    - python: pypy3
+      env: TOXENV=pypy3-django111
+    - python: pypy3
+      env: TOXENV=pypy3-django20
+    - python: pypy3
+      env: TOXENV=pypy3-django21
+    - python: pypy3
+      env: TOXENV=pypy3-django22
+    - python: pypy3
+      env: TOXENV=pypy3-django30
 
 before_install:
   - "wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz"
@@ -57,9 +117,7 @@ install:
   - pip install Django==1.10
   - pip install -r requirements/test.txt
   - pip install -r requirements/docs.txt
-  # TODO: Switch over to pylint v2.0.0 when it becomes available - see circle.yml for further changes
-  - pip install git+https://github.com/PyCQA/pylint.git
-  - pip install git+https://github.com/PyCQA/astroid.git
+  - pip install pylint
 
 script:
   - py.test --cov=django_pdfkit
