@@ -13,9 +13,10 @@ except ImportError:
     from setuptools.command.test import test              # noqa
     is_setuptools = False
 
-import os
-import sys
 import codecs
+import os
+import re
+import sys
 
 NAME = 'django-pdfkit'
 entrypoints = {}
@@ -28,10 +29,14 @@ extra = {}
 classes = """
     Development Status :: 4 - Beta
     Framework :: Django
-    Framework :: Django :: 1.6
-    Framework :: Django :: 1.7
     Framework :: Django :: 1.8
     Framework :: Django :: 1.9
+    Framework :: Django :: 1.10
+    Framework :: Django :: 1.11
+    Framework :: Django :: 2.0
+    Framework :: Django :: 2.1
+    Framework :: Django :: 2.2
+    Framework :: Django :: 3.0
     License :: OSI Approved :: MIT License
     Topic :: Communications
     Topic :: Internet :: WWW/HTTP
@@ -39,12 +44,11 @@ classes = """
     Topic :: Software Development :: Libraries :: Python Modules
     Intended Audience :: Developers
     Programming Language :: Python
-    Programming Language :: Python :: 2
-    Programming Language :: Python :: 2.7
     Programming Language :: Python :: 3
-    Programming Language :: Python :: 3.3
-    Programming Language :: Python :: 3.4
     Programming Language :: Python :: 3.5
+    Programming Language :: Python :: 3.6
+    Programming Language :: Python :: 3.7
+    Programming Language :: Python :: 3.8
     Programming Language :: Python :: Implementation :: CPython
     Programming Language :: Python :: Implementation :: PyPy
     Operating System :: OS Independent
@@ -56,7 +60,6 @@ classifiers = [s.strip() for s in classes.split('\n') if s]
 
 # -*- Distribution Meta -*-
 
-import re
 re_meta = re.compile(r'__(\w+?)__\s*=\s*(.*)')
 re_vers = re.compile(r'VERSION\s*=.*?\((.*?)\)')
 re_doc = re.compile(r'^"""(.+?)"""')
